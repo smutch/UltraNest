@@ -465,7 +465,7 @@ class NestedSampler(object):
             self.comm = MPI.COMM_WORLD if comm is None else comm
             self.mpi_size = self.comm.Get_size()
             self.mpi_rank = self.comm.Get_rank()
-            if self.mpi_size > 1:
+            if self.comm:
                 self.use_mpi = True
         except Exception:
             self.mpi_size = 1
