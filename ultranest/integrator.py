@@ -15,6 +15,7 @@ import warnings
 
 from numpy import log, exp, logaddexp
 import numpy as np
+from numpyencoder import NumpyEncoder
 
 from .utils import create_logger, make_run_dir, resample_equal, vol_prefactor, vectorize, listify as _listify, is_affine_transform, normalised_kendall_tau_distance
 from ultranest.mlfriends import MLFriends, AffineLayer, ScalingLayer, find_nearby, WrappingEllipsoid
@@ -2615,7 +2616,7 @@ class ReactiveNestedSampler(object):
                        comments='')
 
             with open(os.path.join(self.logs['info'], 'results.json'), 'w') as f:
-                json.dump(results_simple, f, indent=4)
+                json.dump(results_simple, f, indent=4, cls=NumpyEncoder)
 
             np.savetxt(
                 os.path.join(self.logs['info'], 'post_summary.csv'),
